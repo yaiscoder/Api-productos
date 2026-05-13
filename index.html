@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUXE | Tienda Premium</title>
     <!-- Librerías corregidas -->
-    <script src="https://unpkg.com"></script>
-    <link href="https://googleapis.com" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
             --bg: #FBFBFD;
@@ -185,7 +184,7 @@
     <main class="shop-section">
         <aside class="filters">
             <h3>Categorías</h3>
-            <div class="filter-item active">Todos los productos</div>
+            <div class="filter-item active" onclick="changeCategory('all')">Todos los productos</div>
             <div id="category-list">
 
             </div>
@@ -197,11 +196,7 @@
             <div id="card-products" class="products-grid"></div>
 
             <div class="pagination-container" id="pagination">
-                <button class="page-btn"><i data-lucide="chevron-left"></i></button>
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <button class="page-btn"><i data-lucide="chevron-right"></i></button>
+                
             </div>
             
         </section>
@@ -209,6 +204,10 @@
         
 
     </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
 
     <script src="main.js"></script>
 </body>

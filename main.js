@@ -1,15 +1,32 @@
-async function cardproducts (){
+let currentPage = 1;
+let currentCategory = 'all';
+const productsPerPage = 9;
+
+
+async function cardproducts (page){
     const catalog = document.getElementById('card-products');
 
-    const response = await fetch('https://dummyjson.com/products');
+    const skip = (page - 1) * productsPerPage;
+
+    let url = '';
+    if(currentCategory === 'all'){
+        url = `https://dummyjson.com/products?limit=${productsPerPage}&skip=${skip}`;
+    }else{
+        url = `https://dummyjson.com/products/category/${currentCategory}?limit=${productsPerPage}&skip=${skip}`;
+    }
+    
+    const response = await fetch(url);
+
     const data = await response.json();
     console.log(data)
+
+    catalog.innerHTML = '';
 
     for (let product of data.products){
 
         const {title, category, thumbnail, price} = product
 
-        catalog.innerHTML += `<div class="products-grid" id="products-container">
+        catalog.innerHTML += `<div>
                 <div class="card">
                     <img src="${thumbnail}" alt="${title}" class="card-img">
                     <div class="card-category">${category}</div>
@@ -22,9 +39,48 @@ async function cardproducts (){
             </div>`
     }
     
+    createPagination(data.total);
 }
 
-cardproducts();
+function createPagination(totalProducts) {
+
+    const pagination = document.getElementById('pagination');
+
+    pagination.innerHTML = '';
+
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+    pagination.innerHTML += `<button class="page-btn" onclick="previousPage()" ${currentPage === 1 ? 'disabled' : ''}>←</button>
+        <button class="page-btn active">${currentPage}</button>
+        <button class="page-btn" onclick="nextPage(${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>→</button>`;
+}
+
+function previousPage(){
+
+    if(currentPage > 1){
+        currentPage--;
+        cardproducts(currentPage);
+    }
+}
+
+function nextPage(totalPages){
+
+    if(currentPage < totalPages){
+        currentPage++;
+        cardproducts(currentPage);
+    }
+}
+
+function changeCategory(category){
+
+    currentCategory = category;
+    currentPage = 1;
+
+    cardproducts(currentPage);
+}
+
+
+cardproducts(currentPage);
 
 async function categoryList (){
     const category = document.getElementById('category-list');
@@ -34,13 +90,8 @@ async function categoryList (){
     console.log(data1)
 
     for (let cate of data1){
-        category.innerHTML += `<div class="filter-item">${cate}</div>`
+        category.innerHTML += `<div class="filter-item" onclick="changeCategory('${cate}')">${cate}</div>`
     }
 }
+
 categoryList()
-
-// async function searchCategory (){
-//     const search = document.getElementById('card-products');
-
-//     const response2 = await fetch('https://dummyjson.com/products/category/'${category});
-// }
