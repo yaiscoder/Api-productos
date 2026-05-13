@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXE | Tienda Premium</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">LUXE.</div>
+            <div class="nav-icons">
+                <div class="icon-btn"><i data-lucide="search"></i></div>
+                <div class="icon-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="badge" id="cart-count">0</span>
+                </div>
+                <div class="icon-btn"><i data-lucide="user"></i></div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-card">
+            <h1>Audio de otro <br> nivel.</h1>
+            <p>Descubre los nuevos auriculares con cancelación de ruido inteligente.</p>
+            <button class="btn-primary">Comprar ahora</button>
+        </div>
+    </section>
+
+    <main class="shop-section">
+        <aside class="filters">
+            <h3>Categorías</h3>
+            <div class="filter-item active">Todos los productos</div>
+            <div id="category-list">
+
+            </div>
+
+        </aside>
+
+        <section> <!-- Contenedor de Paginación -->
+
+            <div id="card-products" class="products-grid">
+
+            </div>
+
+            <div class="pagination-container" id="pagination">
+                
+            </div>
+            
+        </section>
+
+        
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <script type="module" src="./javascript/main.js"></script>
+</body>
+</html>
